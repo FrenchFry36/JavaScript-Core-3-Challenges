@@ -47,8 +47,9 @@ async function fetchWeatherData() {
 // function fils photos url
 async function getPhotosUrl() {
   try {
-    const mainValue = await fetchWeatherData();
-    const photosUrl = `https://api.unsplash.com/search/photos?query=${mainValue}&client_id=LazB1Bw0iVelhysK3r7TS2l2L-jrnpXWZsTv-x7H7tU`;
+    const inputValue = getInputValue();
+    // const mainValue = await fetchWeatherData();
+    const photosUrl = `https://api.unsplash.com/search/photos?query=${inputValue}&client_id=LazB1Bw0iVelhysK3r7TS2l2L-jrnpXWZsTv-x7H7tU`;
 
     return photosUrl;
   } catch (error) {
