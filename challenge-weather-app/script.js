@@ -1,5 +1,7 @@
 const inputElement = document.getElementById("search-tf");
 const searchButton = document.querySelector(".search__btn");
+const thumbNails = document.getElementById("thumbs");
+const figure = document.getElementById("photo");
 
 // function gets lowercase of input value
 function getInputValue() {
@@ -45,7 +47,6 @@ async function getPhotosUrl() {
   try {
     const mainValue = await fetchWeatherData();
     const photosUrl = `https://api.unsplash.com/search/photos?query=${mainValue}&client_id=LazB1Bw0iVelhysK3r7TS2l2L-jrnpXWZsTv-x7H7tU`;
-    console.log("photos url: ", photosUrl);
 
     return photosUrl;
   } catch (error) {
@@ -59,7 +60,26 @@ async function fetchPhotosData() {
     const photosUrl = await getPhotosUrl();
     const data = await fetchData(photosUrl);
     data.results.forEach((photo) => {
-      console.log(`Photo by ${photo.user.name}: ${photo.urls.small}`);
+      const thumbnailDiv = document.createElement("div");
+      thumbnailDiv.classList.add("thumbnail"); // a new div element for each photo thumbnail
+
+      const imgElement = document.createElement("img"); // an image element
+      imgElement.src = photo.urls.thumb;
+      imgElement.alt = `Photo by ${photo.user.name}`;
+
+      // make thumbnail clickable and default figure img
+      const thumbnailAnchor = document.createElement("a");
+
+      thumbnailDiv.appendChild(imgElement);
+      thumbnailAnchor.appendChild(thumbnailDiv);
+      thumbNails.appendChild(thumbnailAnchor);
+
+      thumbnailAnchor.addEventListener("click", () => {
+        const figureImg = document.createElement("img");
+        figureImg.src = photo.urls.regular;
+        figureImg.alt = `Photo by ${photo.user.name}`;
+        figure.replaceChildren(figureImg);
+      });
     });
   } catch (error) {
     console.error("Error fetching photos data:", error); // Handle errors
@@ -71,13 +91,3 @@ document.getElementById("search").addEventListener("submit", async (event) => {
 
   await fetchPhotosData();
 });
-
-// const photoResponse = fetch(
-//   "https://api.unsplash.com/search/photos?query=snow&client_id=LazB1Bw0iVelhysK3r7TS2l2L-jrnpXWZsTv-x7H7tU"
-// )
-//   .then((data) => data.json())
-//   .then((data) =>
-//     data.results.forEach((photo) => {
-//       console.log(`Photo by ${photo.user.name}: ${photo.urls.small}`);
-//     })
-//   );
