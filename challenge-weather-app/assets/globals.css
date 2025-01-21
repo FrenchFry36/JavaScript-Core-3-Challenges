@@ -15,7 +15,7 @@
   --thumb-h: 45px;
   --thumbs-px: 10px;
   --thumbs-py: 10px;
-  --thumbs-h: calc(var(--thumb-h) + (var(--thumbs-py) * 2));
+  --thumbs-h: calc(var(--thumb-h) + (var(--thumbs-py) * 6));
 }
 
 html,
