@@ -2,6 +2,8 @@ const inputElement = document.getElementById("search-tf");
 const searchButton = document.querySelector(".search__btn");
 const thumbNails = document.getElementById("thumbs");
 const figure = document.getElementById("photo");
+const conditionsDescribe = document.getElementById("conditions");
+const creditUser = document.getElementById("credit-user");
 
 // function gets lowercase of input value
 function getInputValue() {
@@ -24,7 +26,7 @@ function getWeatherUrl() {
 // async function for data fetching
 async function fetchData(url) {
   let response = await fetch(url); // wait for the fetch to complete
-  return await response.json(); // Parse and return the JSON data
+  return await response.json(); // parse and return the JSON data
 }
 
 // async function fetches required value from weather data fetching
@@ -34,7 +36,7 @@ async function fetchWeatherData() {
   try {
     const data = await fetchData(weatherUrl); // fetch the data and wait for it
     const weatherMain = data.weather[0].main; // access the 'main' value from the weather array
-    console.log("---> " + weatherMain); // log the weather main value
+    console.log("weather currently: " + weatherMain); // log the weather main value
     return weatherMain.toLowerCase();
   } catch (error) {
     console.error("Error fetching weather data:", error); // handle any errors
@@ -59,6 +61,8 @@ async function fetchPhotosData() {
   try {
     const photosUrl = await getPhotosUrl();
     const data = await fetchData(photosUrl);
+    console.log("look: ", data);
+
     data.results.forEach((photo) => {
       const thumbnailDiv = document.createElement("div");
       thumbnailDiv.classList.add("thumbnail"); // a new div element for each photo thumbnail
@@ -74,11 +78,18 @@ async function fetchPhotosData() {
       thumbnailAnchor.appendChild(thumbnailDiv);
       thumbNails.appendChild(thumbnailAnchor);
 
-      thumbnailAnchor.addEventListener("click", () => {
+      thumbnailAnchor.addEventListener("click", async () => {
         const figureImg = document.createElement("img");
         figureImg.src = photo.urls.regular;
         figureImg.alt = `Photo by ${photo.user.name}`;
         figure.replaceChildren(figureImg);
+
+        // editing info bar
+        const mainValue = await fetchWeatherData();
+        conditionsDescribe.innerText = mainValue;
+        creditUser.innerText = photo.user.name;
+        creditUser.href = photo.user.links.html;
+        creditUser.target = "_blank";
       });
     });
   } catch (error) {
