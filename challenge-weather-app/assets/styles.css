@@ -245,7 +245,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background: rgba(0, 0, 0, 0.33); /* Semi-transparent background */
   padding: 20px;
   text-align: center;
   border-radius: 10px;
@@ -253,32 +253,45 @@
 }
 
 /* Title and Paragraph inside Overlay */
-.overlay h1,
-.overlay p {
-  color: white; /* White text */
+.overlay h1 {
   margin: 0;
+  margin-bottom: 30px; /* Significant space between h1 and paragraphs */
+  font-size: 25px; /* Adjust font size for better readability */
 }
 
-/* Search Form Styling */
-.search {
+/* Paragraph Styling (with proportional space) */
+.overlay p {
+  margin: 0;
+  margin-bottom: 20px; /* Add space below each paragraph */
+  font-size: 18px; /* Adjust font size for better readability */
+}
+
+/* Last paragraph (optional, if you want less space after the last one) */
+.overlay p:last-child {
+  margin-bottom: 0; /* Remove bottom margin for the last paragraph */
+}
+
+#search-form {
   display: flex;
   justify-content: center;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.6);
   position: absolute;
-  bottom: 20px;
-  width: 100%;
+  bottom: 30px; /* Adjust the space below the overlay */
+  left: 50%;
+  transform: translateX(-50%); /* Center it horizontally */
+  width: 25%; /* Match the width of overlay */
+  margin-bottom: 40px;
+  background: rgba(0, 0, 0, 0);
 }
 
-.search input {
+#search-form input {
   padding: 10px;
   border-radius: 5px;
   border: none;
   font-size: 16px;
-  width: 70%;
+  width: 50%; /* Control width of input */
 }
 
-.search button {
+#search-form button {
   padding: 10px;
   border-radius: 5px;
   background: #444;
@@ -288,6 +301,58 @@
   cursor: pointer;
 }
 
-.search button:hover {
+#search-form button:hover {
   background: #222;
+}
+
+/* Media Queries for Larger Screens */
+
+/* For tablets (min-width: 768px) */
+@media (min-width: 768px) {
+  /* Increase heading size */
+  .overlay h1 {
+    font-size: 3rem;
+  }
+
+  .overlay p {
+    font-size: 1.5rem;
+  }
+
+  /* Adjust search form layout */
+  #search-form {
+    flex-direction: row;
+    width: 50%; /* Adjust width for tablets */
+  }
+
+  #search-form input,
+  #search-form button {
+    width: 48%; /* Adjust width for input and button */
+    margin-right: 2%;
+  }
+
+  #search-form button {
+    margin-right: 0;
+  }
+}
+
+/* For desktops (min-width: 1024px) */
+@media (min-width: 1024px) {
+  /* Increase font size for larger screens */
+  .overlay h1 {
+    font-size: 3.5rem;
+  }
+
+  .overlay p {
+    font-size: 1.8rem;
+  }
+
+  /* Adjust search form layout for desktop */
+  #search-form {
+    width: 40%; /* Adjust width for desktops */
+  }
+
+  #search-form input,
+  #search-form button {
+    width: 100%; /* Full width input and button */
+  }
 }
