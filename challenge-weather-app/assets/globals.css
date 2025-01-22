@@ -37,10 +37,23 @@ body {
   font-size: 14px;
   background: center center no-repeat;
   background-size: contain;
-  color: #333;
+  color: #eddede;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* global.css */
+
+/* Set the background image for the default screen (starry night) */
+body {
+  background: url("https://source.unsplash.com/1600x900/?starry-night") center
+    center no-repeat;
+  background-size: cover;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  color: #eddede;
 }

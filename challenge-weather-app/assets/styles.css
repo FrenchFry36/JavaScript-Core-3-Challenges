@@ -236,3 +236,58 @@
     font-size: inherit;
   }
 }
+
+/* styles.css */
+
+/* Overlay Styling */
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  color: white; /* Ensure text inside is white */
+}
+
+/* Title and Paragraph inside Overlay */
+.overlay h1,
+.overlay p {
+  color: white; /* White text */
+  margin: 0;
+}
+
+/* Search Form Styling */
+.search {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+}
+
+.search input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  width: 70%;
+}
+
+.search button {
+  padding: 10px;
+  border-radius: 5px;
+  background: #444;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.search button:hover {
+  background: #222;
+}
